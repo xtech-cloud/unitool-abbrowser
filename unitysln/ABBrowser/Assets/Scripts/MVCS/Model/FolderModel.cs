@@ -14,6 +14,7 @@ public class FolderModel : Model
         public string pack = "";
         public string path = "";
         public string name = "";
+        public string alias = "";
         public string code = "";
         public string thumb = "";
         public string android = "";
@@ -23,6 +24,7 @@ public class FolderModel : Model
 
     public class FolderStatus : Model.Status
     {
+        public const string NAME = "FolderStatus";
         public Asset currentAsset = null;
         public Dictionary<string, Asset> assets = new Dictionary<string, Asset>();
     }
@@ -51,6 +53,7 @@ public class FolderModel : Model
 
     public void RefreshFolder(string _path)
     {
+        StaticData.folder = _path;
         status.assets.Clear();
 
         if (string.IsNullOrEmpty(_path))
@@ -85,17 +88,19 @@ public class FolderModel : Model
 					{
 						JSONClass cFile = nFile.AsObject;
                         string name = cFile["name"].Value;
+                        string alias = cFile["alias"].Value;
                         string code = cFile["code"].Value;
                         if (!status.assets.ContainsKey(code))
                             status.assets.Add(code, new Asset());
 						status.assets[code].pack = pack;
 						status.assets[code].path = path;
 						status.assets[code].name = name;
+						status.assets[code].alias = alias;
 						status.assets[code].code = code;
 						status.assets[code].android = Path.Combine(androidDir, pack);
 						status.assets[code].win32 = Path.Combine(win32Dir, pack);
 						status.assets[code].webgl = Path.Combine(webglDir, pack);
-						status.assets[code].thumb = Path.Combine(thumbDir, code);
+						status.assets[code].thumb = Path.Combine(thumbDir, code+".jpg");
 					}
                 }
                 catch (System.Exception ex)

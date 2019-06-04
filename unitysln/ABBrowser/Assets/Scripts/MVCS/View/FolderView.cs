@@ -73,6 +73,7 @@ public class FolderView : View
 
                 assetClone.transform.Find("Toggle/uuid").GetComponent<Text>().text = asset.code;
                 assetClone.transform.Find("Toggle/name").GetComponent<Text>().text = asset.name;
+                assetClone.transform.Find("Toggle/alias").GetComponent<Text>().text = asset.alias;
                 assetClone.transform.Find("Toggle/path").GetComponent<Text>().text = asset.path;
 
                 assetClone.transform.Find("Toggle").GetComponent<Toggle>().onValueChanged.AddListener((_toggled) =>
@@ -121,9 +122,8 @@ public class FolderView : View
 
     private IEnumerator loadAsset(string _url, string _name, string _path)
     {
-        if (!_path.StartsWith("environment") && !_path.StartsWith("model") && !_path.StartsWith("skybox"))
-            yield break;
 
+        Debug.Log(_url);
         WWW www = new WWW("file://" + _url);
         yield return www;
 
@@ -156,7 +156,7 @@ public class FolderView : View
             Material skybox = ab.LoadAsset(_name) as Material;
             RenderSettings.skybox = skybox;
         }
-
+        yield return new WaitForEndOfFrame();
         ab.Unload(false);
         Resources.UnloadUnusedAssets();
     }
@@ -168,7 +168,7 @@ public class FolderView : View
 
         if (null != www.error)
         {
-            this.LogError(www.error);
+            this.LogWarning(www.error);
             yield break;
         }
 

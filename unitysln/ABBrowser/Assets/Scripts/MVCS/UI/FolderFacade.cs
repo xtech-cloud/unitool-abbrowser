@@ -9,9 +9,4 @@ public class FolderFacade : UIFacade
 	public Button btnRefresh;
 	public InputField inputPath;
 	public GameObject templateAsset;
-
-	void Awake()
-	{
-		this.Register();
-	}
 }
