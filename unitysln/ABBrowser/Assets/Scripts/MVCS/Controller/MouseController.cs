@@ -23,7 +23,7 @@ public class MouseController : Controller
     public float YMaxLimit = 90f /*/360f */;
 
     public float DistanceMin = 0.5f;
-    public float DistanceMax = 300f;
+    public float DistanceMax = 1000f;
 
     private Camera camera_ { get; set; }
     private float x_ = 0.0f;
