@@ -24,4 +24,9 @@ public class FolderController :  Controller
 		folderView.RefreshAsset(_status);
 	}
 
+	public void RefreshThumb(FolderModel.FolderStatus _status)
+	{
+		folderView.RefreshThumb(_status);
+	}
+
 }

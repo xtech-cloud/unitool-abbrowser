@@ -111,6 +111,20 @@ public class FolderView : View
         RootMono.instance.StartCoroutine(loadAsset(asset.win32, asset.name, asset.path));
     }
 
+    public void RefreshThumb(FolderModel.FolderStatus _status)
+    {
+        FolderModel.Asset asset = _status.currentAsset;
+        if(null == asset)
+            return;
+
+        Transform target = folderFacade.templateAsset.transform.parent.Find(asset.code);
+        if(null == target)
+            return;
+
+        Image img = target.Find("Toggle/thumb").GetComponent<Image>();
+        RootMono.instance.StartCoroutine(loadSprite(asset.thumb, img));
+    }
+
 
     private void onRefreshButtonClick()
     {

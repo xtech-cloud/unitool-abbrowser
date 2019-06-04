@@ -57,6 +57,8 @@ public class WorkBenchView : View
         Rect rect = new Rect(centerX - textureWidth / 2, centerY - textureHeight / 2, textureWidth, textureHeight);
         rect.y -= workBenchFacade.captureBox.anchoredPosition.y;
         model.SaveCapture(textureWidth, textureHeight, screenWidth, screenHeight, rect);
+
+        (modelCenter_.FindModel(FolderModel.NAME) as FolderModel).RefreshThumb();
     }
 
 }

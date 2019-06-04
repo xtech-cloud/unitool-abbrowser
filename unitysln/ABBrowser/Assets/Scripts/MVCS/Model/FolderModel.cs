@@ -123,4 +123,9 @@ public class FolderModel : Model
         status.currentAsset = status.assets[_uuid];
         folderController.RefreshAsset(status);
     }
+
+    public void RefreshThumb()
+    {
+        folderController.RefreshThumb(status);
+    }
 }
