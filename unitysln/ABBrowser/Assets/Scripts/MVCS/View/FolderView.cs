@@ -39,11 +39,15 @@ public class FolderView : View
     protected override void bindEvents()
     {
         folderFacade.btnRefresh.onClick.AddListener(onRefreshButtonClick);
+        folderFacade.btnExportCSV.onClick.AddListener(onExportCSVClick);
+        folderFacade.btnExportMarkdown.onClick.AddListener(onExportMDClick);
     }
 
     protected override void unbindEvents()
     {
         folderFacade.btnRefresh.onClick.RemoveListener(onRefreshButtonClick);
+        folderFacade.btnExportCSV.onClick.RemoveListener(onExportCSVClick);
+        folderFacade.btnExportMarkdown.onClick.RemoveListener(onExportMDClick);
     }
 
     public void RefreshFolder(FolderModel.FolderStatus _status)
@@ -132,6 +136,16 @@ public class FolderView : View
         folderModel.RefreshFolder(path);
         PlayerPrefs.SetString("path", path);
         PlayerPrefs.Save();
+    }
+
+    private void onExportCSVClick()
+    {
+        folderModel.Export(".csv");
+    }
+
+    private void onExportMDClick()
+    {
+        folderModel.Export(".md");
     }
 
     private IEnumerator loadAsset(string _url, string _name, string _path)
